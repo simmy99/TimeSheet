@@ -1,0 +1,93 @@
+<div class="container">
+  <h1>Time Sheet</h1>
+  <div class="row border p-4 mv-4">
+    <div class="col-md-3">
+      <div class="custom-border p-4">
+
+        <!-- Drop Down Optios -->
+        <div class="d-flex align-items-center">
+          <mat-form-field appearance="outline" class="ml-3">
+            <mat-label>Select Option</mat-label>
+            <mat-select [(value)]="selectedOption" (selectionChange)="onSelectionChange($event)">
+              <mat-select-trigger class="custom-select-trigger">{{ selectedOption }}</mat-select-trigger>
+              <mat-option *ngFor="let option of dropdownOptions" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Calendar -->
+        <input type="date" id="calendarInput" style="border: none; padding: 0;">
+
+        <!-- Comment -->
+        <div class="form-group text-danger"><br>
+          <label for="comment">Comments</label>
+          <textarea class="form-control" id="comment" rows="5"></textarea>
+        </div>
+
+        <!-- legend box -->
+        <div class="legend-box">
+          <div class="legend-row">
+            <div class="legend-rectangle legend-green"></div>
+            <span class="legend-label">Holiday</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-rectangle legend-orange"></div>
+            <span class="legend-label">Total</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-rectangle legend-gray"></div>
+            <span class="legend-label">Inactive cell</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-icon">
+              <i class="bi bi-plus-circle"></i>
+            </span>
+            <span class="legend-label">Add row</span>
+          </div>
+          <div class="legend-row">
+            <span class="legend-icon">
+              <i class="bi bi-trash"></i>
+            </span>
+            <span class="legend-label">Delete row</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row align-items-center">
+        
+        <div class="col-auto">
+          <!-- Profile Icon -->
+          <span class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="User Details">
+            <i class="bi bi-person-circle"></i>
+
+            <span class="profile-name ms-2">Simmy Sebastian</span>
+
+          </span>
+        </div>
+
+        <div class="col">
+          <!-- Curved Rectangle Boxes -->
+          <div class="curved-rectangles">
+            <div class="curved-rectangle"></div>
+            <div class="curved-rectangle"></div>
+            <div class="curved-rectangle"></div>
+            <div class="curved-rectangle"></div>
+            <div class="curved-rectangle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- User Details Modal -->
+<div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+  <!-- Modal content here -->
+</div>
