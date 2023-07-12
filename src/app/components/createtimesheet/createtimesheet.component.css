@@ -1,67 +1,69 @@
 .container {
   margin-top: 20px;
 }
-
-.custom-border {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
 .profile-icon {
   font-size: 1rem;
-  color: #000;
+  color: #0f22ec;
   cursor: pointer;
-  margin-left: 0.75rem; /* Added margin to separate the icon from the dropdown */
+  margin-left: 0.70rem;
 }
-
+/* Legend */
 .legend-box {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 20px;
 }
-
 .legend-row {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
-
 .legend-rectangle {
-  width: 20px;
-  height: 10px;
+  width: 25px;
+  height: 20px;
   margin-right: 5px;
 }
-
 .legend-green {
-  background-color: rgba(0, 128, 0, 0.342);
+  background-color: rgba(109, 206, 5, 0.342);
 }
-
 .legend-orange {
   background-color: rgba(255, 166, 0, 0.333);
 }
-
 .legend-gray {
   background-color: gray;
 }
-
 .legend-icon {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #000;
   cursor: pointer;
-  margin-right: 5px;
+  margin-right: 10px;
+}
+/* Total color */
+.sum-box {
+  background-color: rgba(247, 138, 5, 0.317);
+}
+/* BSSC Buttons */
+.custom-button {
+  font-weight: bold;
+}
+.custom-button-back {
+  background-color: rgba(224, 161, 224, 0.317);
+  color: black;
+}
+.custom-button-save {
+  background-color: rgb(138, 243, 138);
+  color: black;
+}
+.custom-button-submit {
+  background-color: lightblue;
+  color: black;
+}
+/* add & delete button */
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  font-size: 1.2rem;
 }
 
-.curved-rectangles {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.curved-rectangle {
-  width: 80px;
-  height: 30px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  margin-right: 5px;
-}

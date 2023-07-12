@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Time Sheet</h1>
-  <div class="row border p-4 mv-4">
+  <div class="row border p-4 mt-4">
     <div class="col-md-3">
-      <div class="custom-border p-4">
+      <div class="border p-4">
 
         <!-- Drop Down Optios -->
         <div class="d-flex align-items-center">
@@ -23,7 +23,7 @@
         <!-- Comment -->
         <div class="form-group text-danger"><br>
           <label for="comment">Comments</label>
-          <textarea class="form-control" id="comment" rows="5"></textarea>
+          <textarea class="form-control" id="comment" rows="9"></textarea>
         </div>
 
         <!-- legend box -->
@@ -53,37 +53,154 @@
             <span class="legend-label">Delete row</span>
           </div>
         </div>
-
-
       </div>
     </div>
-
+    <!-- right side section -->
     <div class="col-md-9">
-      <div class="row align-items-center">
-        
-        <div class="col-auto">
-          <!-- Profile Icon -->
-          <span class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="User Details">
-            <i class="bi bi-person-circle"></i>
+      <div class="border p-4 border-right-4" style="width: calc(100% + 8px);">
+        <div class="row align-items-center">
 
-            <span class="profile-name ms-2">Simmy Sebastian</span>
+          <style>
+            .custom-popover {
+              background-color: blue;
+              color: white;
+            }
+          </style>
+          
+          
+          <div class="col-auto">
+            <!-- Profile Icon -->
+            <span class="profile-icon" 
+              data-bs-toggle="popover" 
+              data-bs-placement="bottom"
+              data-bs-html="true"
+              data-bs-content="
+                <strong>Designation:</strong> Frontend Developer <br>
+                <strong>Phone:</strong> 9876543210 <br>
+                <strong>Email:</strong> simmy@gmail.com"
+              data-bs-container="body"
+              data-bs-trigger="hover">
+              <i class="bi bi-person-circle"></i>
+              <span class="profile-name ms-1">Simmy Sebastian</span>
+            </span>
+          </div>
+          
 
-          </span>
-        </div>
+          <div class="col">
+            <!-- Button Group -->
+            <div class="btn-group" role="group" aria-label="Time Range Buttons">
+              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Jul 31- Aug 06</button>
+              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Aug 7- Aug 13</button>
+              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Aug 14- Aug 20</button>
+              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Aug 21- Aug 27</button>
+              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Aug 28- Sep 03</button>
+            </div>
+            <div class="ms-3"></div>
+          </div>
 
-        <div class="col">
-          <!-- Curved Rectangle Boxes -->
-          <div class="curved-rectangles">
-            <div class="curved-rectangle"></div>
-            <div class="curved-rectangle"></div>
-            <div class="curved-rectangle"></div>
-            <div class="curved-rectangle"></div>
-            <div class="curved-rectangle"></div>
+          <!-- Time Sheet Table -->
+          
+          <div class="row mb-3">
+            <!-- Heading Row -->
+            <div class="col-2 bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">Project Name</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">mon 3 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">tue 4 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">wed 5 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">thu 6 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">fri 7 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">sat 8 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">sun 9 july</span>
+              </div>
+            </div>
+            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+              <div class="time-sheet-box">
+                <span class="time-sheet-label text-white fw-bold">Total</span>
+              </div>
+            </div>
+          </div>
+                 
+          <!-- Data Row -->
+
+          <div class="row" *ngFor="let row of rows; let i = index" [id]="'row-' + i">
+            <div class="col-2 py-2 d-flex align-items-center justify-content-start" style="margin-left: -10px;">
+              <select class="form-select" style="max-width: 148px;">
+                <option selected>Select Project</option>
+                <option>Project 1</option>
+                <option>Project 2</option>
+                <option>Project 3</option>
+                <option>Project 4</option>
+                <!-- Add more project options if needed -->
+              </select>
+            </div>
+            
+            <div class="col-9 py-2 border-right">
+              <div class="d-flex align-items-center text-start justify-content-start">
+                <!-- ngFor directive to generate the input fields dynamically instead of repeating the code multiple times -->
+                <ng-container *ngFor="let weekDay of weekDays">
+                  <input type="text" class="form-control mx-3" style="width: 60px;" pattern="[0-9]*" inputmode="numeric"
+                    placeholder="0.00">
+                </ng-container>
+              </div>
+            </div>           
+            
+            <div class="col-1 py-1 d-flex flex-column align-items-center justify-content-center">
+              <div class="sum-box">
+                <span class="fw-bold form-control mx-1 sum-box" id="totalSum">0.00</span>
+              </div>
+            </div>
+   
+            <div class="d-flex justify-content-end">
+              <!-- Plus icon to Add a row -->
+              <button type="button" class="icon-button me-1 mt-2" (click)="addRow()"><i class="bi bi-plus-circle"></i></button>
+            
+              <!-- Delete icon to Remove a row -->
+              <button type="button" class="icon-button me-1 mt-2" (click)="deleteRow(i)"><i class="bi bi-trash"></i></button>
+            </div>
+            
           </div>
         </div>
       </div>
+
+      <!-- BSSC Buttons -->
+
+      <div class="d-flex justify-content-end mt-5">
+        <button type="button" class="btn custom-button custom-button-back me-3">BACK</button>
+        <button type="button" class="btn custom-button custom-button-save me-3">SAVE</button>
+        <button type="button" class="btn custom-button custom-button-submit me-3">SUBMIT</button>
+        <button type="button" class="btn custom-button custom-button-back">CANCEL</button>
+      </div>
+  
     </div>
-    
   </div>
 </div>
 
