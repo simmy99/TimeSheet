@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
-declare var $: any; // Import jQuery
+declare var $: any; // Import jQuery for add sum
 
 @Component({
   selector: 'app-createtimesheet',
@@ -9,15 +9,14 @@ declare var $: any; // Import jQuery
 export class CreatetimesheetComponent implements OnInit, AfterViewInit {
   @ViewChild('inputFields') inputFields!: ElementRef<HTMLInputElement[]>;
 
-
-  selectedOption: string = '';
+  selectedOption: string = '';  // left dropdown
   dropdownOptions: string[] = ['26-6-23 to 2-7-23', '3-7-23 to 9-7-23', '10-7-23 to 16-7-23', '17-7-23 to 23-7-23', '24-7-23 to 30-7-23', '31-7-23 to 6-8-23'];
 
-  weeks: string[] = []; // for weeks
+  weeks: string[] = []; // weeks in tymsheet
   weekDays: number[] = [1, 2, 3, 4, 5, 6, 7];
   defaultTotalSum: string = '0.00';
 
-  rows: any[] = []; //for add row
+  rows: any[] = []; // for add row
 
   ngOnInit() {
     // Initialize popover after the component is initialized
@@ -28,12 +27,12 @@ export class CreatetimesheetComponent implements OnInit, AfterViewInit {
   }
 
   addRow() {
-    this.rows.push({}); // Add an empty object or initialize with default values
+    this.rows.push({}); // Add an empty row
   }
 
   deleteRow(i: number) {
     if (i > 0) {
-      this.rows.splice(i, 1); // Remove the row at the specified index
+      this.rows.splice(i, 1); // Delete the row 
     }
   }
 

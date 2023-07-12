@@ -1,6 +1,7 @@
 .container {
   margin-top: 20px;
 }
+/* Profile Icon */
 .profile-icon {
   font-size: 1rem;
   color: #0f22ec;
@@ -38,11 +39,11 @@
   cursor: pointer;
   margin-right: 10px;
 }
-/* Total color */
+/* Total Sum color */
 .sum-box {
   background-color: rgba(247, 138, 5, 0.317);
 }
-/* BSSC Buttons */
+/* Main Buttons */
 .custom-button {
   font-weight: bold;
 }
@@ -66,4 +67,3 @@
   line-height: 1;
   font-size: 1.2rem;
 }
-
