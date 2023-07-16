@@ -1,5 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
-declare var $: any; // Import jQuery for add sum
+import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-createtimesheet',
@@ -7,55 +6,53 @@ declare var $: any; // Import jQuery for add sum
   styleUrls: ['./createtimesheet.component.css']
 })
 export class CreatetimesheetComponent implements OnInit, AfterViewInit {
-  @ViewChild('inputFields') inputFields!: ElementRef<HTMLInputElement[]>;
+  @ViewChildren('inputField') inputFields!: QueryList<ElementRef<HTMLInputElement>>;
 
-  selectedOption: string = '';  // left dropdown
+  selectedOption: string = '';
   dropdownOptions: string[] = ['26-6-23 to 2-7-23', '3-7-23 to 9-7-23', '10-7-23 to 16-7-23', '17-7-23 to 23-7-23', '24-7-23 to 30-7-23', '31-7-23 to 6-8-23'];
 
-  weeks: string[] = []; // weeks in tymsheet
-  weekDays: number[] = [1, 2, 3, 4, 5, 6, 7];
-  defaultTotalSum: string = '0.00';
-
-  rows: any[] = []; // for add row
+  rows: any[] = [];
+  weekDays: string[] = ['mon 3 july', 'tue 4 july', 'wed 5 july', 'thu 6 july', 'fri 7 july', 'sat 8 july', 'sun 9 july'];
 
   ngOnInit() {
-    // Initialize popover after the component is initialized
-    $(document).ready(() => {
-      $('[data-bs-toggle="popover"]').popover();
-    });
     this.addRow();
   }
 
-  addRow() {
-    this.rows.push({}); // Add an empty row
-  }
-
-  deleteRow(i: number) {
-    if (i > 0) {
-      this.rows.splice(i, 1); // Delete the row 
-    }
-  }
-
   ngAfterViewInit() {
-    // Destroy popover when the component is destroyed to prevent memory leaks
-    $(document).ready(() => {
-      $('[data-bs-toggle="popover"]').on('hidden.bs.popover', () => {
-        $(this).popover('dispose');
-      });
-    });
+    this.calculateTotalSum();
+  }
 
-    const inputs = $('input[type="text"]');
-    const totalSum = $('#totalSum');
+  addRow() {
+    this.rows.push({});
+  }
 
-    inputs.on('input', () => {
-      let sum = 0;
-      inputs.each((index: number, input: HTMLInputElement) => {
-        const value = parseFloat($(input).val() as string);
+  deleteRow(index: number) {
+    if (index > 0) {
+      this.rows.splice(index, 1);
+    }
+    this.calculateTotalSum();
+  }
+
+  calculateTotalSum() {
+    setTimeout(() => {
+      const inputFields = this.inputFields.toArray();
+      const totalSumElement = document.getElementById('totalSum');
+
+      let totalSum = 0;
+
+      inputFields.forEach((inputField: ElementRef<HTMLInputElement>) => {
+        const value = parseFloat(inputField.nativeElement.value);
         if (!isNaN(value)) {
-          sum += value;
+          totalSum += value;
+          inputField.nativeElement.classList.remove('invalid-input');
+        } else {
+          inputField.nativeElement.classList.add('invalid-input');
         }
       });
-      totalSum.text(sum.toFixed(2));
+
+      if (totalSumElement) {
+        totalSumElement.innerText = totalSum.toFixed(2);
+      }
     });
   }
 
