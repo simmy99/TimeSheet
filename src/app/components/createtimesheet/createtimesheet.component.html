@@ -3,34 +3,54 @@
   <div class="row border p-4 mt-4">
     <div class="col-md-3">
       <div class="border p-4">
+        <div class="dropdown mb-4 text-center align-items-center">
 
-        <!-- Left Drop Down Options -->
-        <div class="d-flex align-items-center" style="width: 100%;">
-          <mat-form-field appearance="outline" class="ml-3">
-            <mat-label>Select Option</mat-label>
-            <mat-select [(value)]="selectedOption" (selectionChange)="onSelectionChange($event)">
-              <mat-select-trigger class="custom-select-trigger">{{ selectedOption }}</mat-select-trigger>
-              <mat-option *ngFor="let option of dropdownOptions" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <!-- Left Drop Down Options -->
+          <button class="btn btn-info dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+            aria-expanded="true">
+            <i class="bi bi-calendar2-week mr-2"></i>
+            <span class="ms-1 small">{{ getDropdownLabel() }}</span>
+          </button>
+
+          <!-- Calendar -->
+          <ul class="dropdown-menu w-100 align-items-center" style="display: none;">
+            <li><a class="dropdown-item" (click)="selectFirstHalf()">01-{{ getCurrentMonthName().substr(0,
+                3) }}-{{ selectedDate.year }} to 15-{{ getCurrentMonthName().substr(0, 3) }}-{{
+                selectedDate.year }}</a></li>
+            <li><a class="dropdown-item" (click)="selectSecondHalf()">16-{{ getCurrentMonthName().substr(0,
+                3) }}-{{ selectedDate.year }} to {{ getLastDayOfMonth() }}-{{
+                getCurrentMonthName().substr(0, 3) }}-{{ selectedDate.year }}</a></li>
+          </ul>
         </div>
 
-        <!-- Calendar -->
-        <input type="date" id="calendarInput"
-          style="border: visible; padding: 0; width: 230px; height: 40px; text-align: center;">
 
+        <!-- for calender -->
+        <div class="text-center">
+          <div class="align-items-center justify-content-center">
+            <ngb-datepicker [displayMonths]="1" [minDate]="minDate" [maxDate]="maxDate" [outsideDays]="'visible'"
+              [showWeekNumbers]="false" [(ngModel)]="selectedDate" class="custom-datepicker"
+              (ngModelChange)="generateWeekButtons()">
+              <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected"
+                let-disabled="disabled" let-focused="focused">
+                <div class="custom-day" [class.current-month]="currentMonth" [class.selected]="selected"
+                  [class.highlighted]="isHighlighted(date)" [class.text-primary]="isCurrentDate(date)">
+                  {{ date.day }}
+                </div>
+              </ng-template>
+            </ngb-datepicker>
+          </div>
+        </div>
 
         <!-- Comment -->
-        <div class="form-group text-danger"><br>
+        <div class="form-group fw-bold text-danger"><br>
           <label for="comment">Comments (Day-Activity)</label>
-          <textarea class="form-control" id="comment" rows="9"></textarea>
+          <textarea class="form-control" id="comment" rows="4"></textarea>
         </div>
 
         <!-- legend box -->
-        <div class="legend-box">
-          <div class="legend-row">
+        <div class="border legend-box">
+          <span class="fw-bold">Legends</span>
+          <div class="legend-row mt-3">
             <div class="legend-rectangle legend-green"></div>
             <span class="legend-label">Holiday</span>
           </div>
@@ -62,87 +82,67 @@
     <div class="col-md-9">
       <div class="border p-4 border-right-4" style="margin-left: -12px; padding-right: 20px;">
         <div class="row align-items-center">
-          <div class="col-auto">
-            <!-- Profile Icon -->
-            <img src="assets\images\photo.jpg" class="profile-photo"
-              style="width:35px; height: 40px; border-radius: 45%">
-            <span class="profile-name ms-1" data-bs-toggle="tooltip" [ngbPopover]="contactCardContent"
-              data-bs-placement="bottom" data-bs-html="true" [attr.data-bs-content]="profileContent" style="cursor: pointer;">Simmy
-              Sebastian</span>
-          </div>
-
-          <ng-template #contactCardContent>
-            <div class="card" style="width: 15rem;">
-              <div class="card-header bg-secondary text-white">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="col-auto">
+                <!-- Profile Icon -->
                 <img src="assets\images\photo.jpg" class="profile-photo"
-                  style="width:35px; height: 40px; border-radius: 45%">&nbsp;
-                <span class="fw-bold">Simmy Sebastian</span>
+                  style="width:35px; height: 40px; border-radius: 45%">
+                <span class="profile-name ms-1" data-bs-toggle="tooltip" [ngbPopover]="contactCardContent"
+                  data-bs-placement="bottom" data-bs-html="true" [attr.data-bs-content]="profileContent"
+                  style="cursor: pointer;">Simmy
+                  Sebastian</span>
               </div>
-              <div class="card-body pr-4">
-                <strong>Designation:</strong> Frontend Developer <br>
-                <strong>Phone:</strong> 9876543210 <br>
-                <strong>Email:</strong> simmy@gmail.com
-              </div>
-            </div>
-          </ng-template>
 
-          <div class="col">
-            <!-- Date Button Group -->
-            <div class="btn-group justify-content-end" role="group" aria-label="Time Range Buttons">
-              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Jul 3- Jul 9</button>
-              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Jul 10- Jul 16</button>
-              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Jul 17- Jul 23</button>
-              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Jul 24- Jul 30</button>
-              <button type="button" class="btn btn-outline-secondary btn-rounded mb-2 gap">Jul 31- Aug 6</button>
+              <ng-template #contactCardContent>
+                <div class="card" style="width: 15rem;">
+                  <div class="card-header bg-secondary text-white">
+                    <img src="assets\images\photo.jpg" class="profile-photo"
+                      style="width:35px; height: 40px; border-radius: 45%">&nbsp;
+                    <span class="fw-bold">Simmy Sebastian</span>
+                  </div>
+                  <div class="card-body pr-4">
+                    <strong>Designation:</strong> Frontend Developer <br>
+                    <strong>Phone:</strong> 9876543210 <br>
+                    <strong>Email:</strong> simmy@gmail.com
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+
+            <div class="d-flex flex-wrap">
+              <button *ngFor="let week of weeks" class="btn btn-info btn-sm m-2 rounded   "
+                (click)="showDays(week)">
+                {{ week.start }} {{ getCurrentMonthName() | slice:0:3 }} to {{ week.end }} {{
+                getCurrentMonthName() | slice:0:3 }}
+              </button>
             </div>
           </div>
-
           <!-- Time Sheet Table -->
           <div class="row mb-3">
             <!-- Heading Row -->
-            <div class="col-2 bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+            <div class="col-2 d-flex align-items-center justify-content-start" style="height: 50px;">
               <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">Project Name</span>
+                <span class="time-sheet-label fw-bold">Project Assigned</span>
               </div>
             </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">mon 3 july</span>
+            <!-- week section -->
+            <div class="col-8 py-1 border-right">
+              <!-- Display the days of the week inside the border-->
+              <div class="d-flex ms-1 align-items-center justify-content-end">
+                <ng-container *ngFor="let day of daysOfWeek">
+                  <div class="text-center mx-2 text-success">
+                    <div class="fw-bold">{{ day | date: 'EEE' }}</div>
+                    <div class="fw-bold">{{ day | date: 'd MMM' }}</div>
+                  </div>
+                  <div class="ms-3"></div> <!-- Add space between days using ms-4 class -->
+                </ng-container>
               </div>
             </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
+
+            <div class="col d-flex align-items-center justify-content-start" style="height: 50px;">
               <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">tue 4 july</span>
-              </div>
-            </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">wed 5 july</span>
-              </div>
-            </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">thu 6 july</span>
-              </div>
-            </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">fri 7 july</span>
-              </div>
-            </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">sat 8 july</span>
-              </div>
-            </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">sun 9 july</span>
-              </div>
-            </div>
-            <div class="col bg-success d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label text-white fw-bold">Total</span>
+                <span class="time-sheet-label fw-bold">Total Hours</span>
               </div>
             </div>
           </div>
@@ -193,7 +193,7 @@
               <span class="label-text fw-bold fs-5">Total Working Hours:</span>
             </div>
             <div class="circle bg-success d-flex align-items-center justify-content-center"
-              style="width: 80px; height: 40px; border-radius: 30px;">
+              style="width: 80px; height: 40px; border-radius: 20px;">
               <span class="span-text fw-bold" style="color: rgb(244, 183, 92);" id="totalSum">{{ totalSumAll }}</span>
             </div>
           </div>
@@ -201,7 +201,7 @@
       </div>
 
       <!-- Main Buttons -->
-      <div class="d-flex justify-content-end mt-5">
+      <div class="d-flex justify-content-center mt-5">
         <button type="button" class="btn custom-button custom-button-back me-4">BACK</button>
         <button type="button" class="btn custom-button custom-button-save me-4">SAVE</button>
         <button type="button" class="btn custom-button custom-button-submit me-4">SUBMIT</button>
