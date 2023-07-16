@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 
+
 @Component({
   selector: 'app-createtimesheet',
   templateUrl: './createtimesheet.component.html',
@@ -14,6 +15,24 @@ export class CreatetimesheetComponent implements OnInit, AfterViewInit {
   rows: any[] = [];
   weekDays: string[] = ['mon 3 july', 'tue 4 july', 'wed 5 july', 'thu 6 july', 'fri 7 july', 'sat 8 july', 'sun 9 july'];
 
+  
+  weeks: { start: number; end: number }[] = [];
+  profileContent: string = '';
+  totalSumAll: string = '0.00'; // Declare totalSumAll as a string
+  columnSums: number[] = [];
+  // for displaying dropdown options
+  selectedProject: string = '';
+  projects: string[] = [
+    'Uprime',
+    'Uprime R&D',
+    'Open Therapeutics',
+    'Vacations',
+    'Holidays'
+  ];
+
+  constructor(){
+    
+  }
   ngOnInit() {
     this.addRow();
   }
@@ -21,9 +40,15 @@ export class CreatetimesheetComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.calculateTotalSum();
   }
+  
+
+  // Above contents added my me 
 
   addRow() {
-    this.rows.push({});
+    const newRow = {
+      values: this.weekDays.map(() => '0.00')
+    };
+    this.rows.push(newRow);
   }
 
   deleteRow(index: number) {
@@ -35,26 +60,34 @@ export class CreatetimesheetComponent implements OnInit, AfterViewInit {
 
   calculateTotalSum() {
     setTimeout(() => {
-      const inputFields = this.inputFields.toArray();
-      const totalSumElement = document.getElementById('totalSum');
-
       let totalSum = 0;
+      this.rows.forEach((row, rowIndex) => {
+        const inputFields = this.inputFields.toArray();
+        const totalSumElement = document.getElementById(`totalSum-${rowIndex}`);
 
-      inputFields.forEach((inputField: ElementRef<HTMLInputElement>) => {
-        const value = parseFloat(inputField.nativeElement.value);
-        if (!isNaN(value)) {
-          totalSum += value;
-          inputField.nativeElement.classList.remove('invalid-input');
-        } else {
-          inputField.nativeElement.classList.add('invalid-input');
+        let rowSum = 0;
+
+        inputFields.forEach((inputField: ElementRef<HTMLInputElement>, index) => {
+          const value = parseFloat(inputField.nativeElement.value);
+          if (!isNaN(value) && index >= rowIndex * this.weekDays.length && index < (rowIndex + 1) * this.weekDays.length) {
+            rowSum += value;
+            inputField.nativeElement.classList.remove('invalid-input');
+          }
+        });
+
+        totalSum += rowSum;
+
+        if (totalSumElement) {
+          totalSumElement.innerText = rowSum.toFixed(2);
         }
       });
 
-      if (totalSumElement) {
-        totalSumElement.innerText = totalSum.toFixed(2);
-      }
+      this.totalSumAll = totalSum.toFixed(2);
     });
   }
+
+  
+  
 
   onSelectionChange(event: any) {
     // Do something with the selected option
