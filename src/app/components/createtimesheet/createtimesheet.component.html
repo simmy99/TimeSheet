@@ -1,30 +1,37 @@
-<div class="container">
+<div class="container-fluid">
   <h1>Time Sheet</h1>
-  <div class="row border p-4 mt-4">
-    <div class="col-md-3">
-      <div class="border p-4">
-        <div class="dropdown mb-4 text-center align-items-center">
+  <div class="row p-3 mt-4">
+
+    <!-- Left Colapse -->
+    <div class="d-flex justify-content-start">
+      <button class="btn text-success" type="button" (click)="toggleLeftSection()">
+        <i [class.bi-chevron-double-left]="!isLeftSectionVisible" [class.bi-chevron-double-right]="isLeftSectionVisible"
+          style="font-size: 2rem;"></i>
+      </button>
+    </div>
+    <div class="col-md-3" [ngClass]="{ 'collapse-left': !isLeftSectionVisible }">
+      <div [class.slide-out-left]="!isLeftSectionVisible" [class.slide-in-left]="isLeftSectionVisible"
+        class="border p-4">
+        <div class=" dropdown mb-4 text-center align-items-center">
 
           <!-- Left Drop Down Options -->
-          <button class="btn btn-info dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
-            aria-expanded="true">
-            <i class="bi bi-calendar2-week mr-2"></i>
+          <button class="btn btn-secondary dropdown-toggle w-100 focus-visible" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-calendar-check mr-2"></i>
             <span class="ms-1 small">{{ getDropdownLabel() }}</span>
           </button>
 
           <!-- Calendar -->
-          <ul class="dropdown-menu w-100 align-items-center" style="display: none;">
-            <li><a class="dropdown-item" (click)="selectFirstHalf()">01-{{ getCurrentMonthName().substr(0,
-                3) }}-{{ selectedDate.year }} to 15-{{ getCurrentMonthName().substr(0, 3) }}-{{
+          <ul class="dropdown-menu w-100 align-items-center">
+            <li><a class="dropdown-item" (click)="selectFirstHalf()" [ngClass]="{'active': isFirstHalfSelected()}">01-{{
+                getCurrentMonthName().substr(0, 3) }}-{{
+                selectedDate.year }} to 15-{{ getCurrentMonthName().substr(0, 3) }}-{{ selectedDate.year }}</a></li>
+            <li><a class="dropdown-item" (click)="selectSecondHalf()">16-{{ getCurrentMonthName().substr(0, 3) }}-{{
+                selectedDate.year }} to {{ getLastDayOfMonth() }}-{{ getCurrentMonthName().substr(0, 3) }}-{{
                 selectedDate.year }}</a></li>
-            <li><a class="dropdown-item" (click)="selectSecondHalf()">16-{{ getCurrentMonthName().substr(0,
-                3) }}-{{ selectedDate.year }} to {{ getLastDayOfMonth() }}-{{
-                getCurrentMonthName().substr(0, 3) }}-{{ selectedDate.year }}</a></li>
           </ul>
         </div>
 
-
-        <!-- for calender -->
         <div class="text-center">
           <div class="align-items-center justify-content-center">
             <ngb-datepicker [displayMonths]="1" [minDate]="minDate" [maxDate]="maxDate" [outsideDays]="'visible'"
@@ -32,8 +39,7 @@
               (ngModelChange)="generateWeekButtons()">
               <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected"
                 let-disabled="disabled" let-focused="focused">
-                <div class="custom-day" [class.current-month]="currentMonth" [class.selected]="selected"
-                  [class.highlighted]="isHighlighted(date)" [class.text-primary]="isCurrentDate(date)">
+                <div class="custom-day" [class.current-month]="currentMonth" [class.text-primary]="isCurrentDate(date)">
                   {{ date.day }}
                 </div>
               </ng-template>
@@ -79,27 +85,28 @@
     </div>
 
     <!-- right side section -->
-    <div class="col-md-9">
-      <div class="border p-4 border-right-4" style="margin-left: -12px; padding-right: 20px;">
+    <div class="col-md-9" [ngClass]="{ 'full-width': !isLeftSectionVisible }">
+      <div class="border p-4">
         <div class="row align-items-center">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="col-auto">
+
                 <!-- Profile Icon -->
                 <img src="assets\images\photo.jpg" class="profile-photo"
                   style="width:35px; height: 40px; border-radius: 45%">
-                <span class="profile-name ms-1" data-bs-toggle="tooltip" [ngbPopover]="contactCardContent"
-                  data-bs-placement="bottom" data-bs-html="true" [attr.data-bs-content]="profileContent"
-                  style="cursor: pointer;">Simmy
+                <span class="profile-name ms-1 text-primary text-decoration-underline" data-bs-toggle="tooltip"
+                  [ngbPopover]="contactCardContent" data-bs-placement="bottom" data-bs-html="true"
+                  [attr.data-bs-content]="profileContent" style="cursor: pointer; font-size: larger;">Simmy
                   Sebastian</span>
               </div>
 
               <ng-template #contactCardContent>
                 <div class="card" style="width: 15rem;">
-                  <div class="card-header bg-secondary text-white">
+                  <div class="card-header bg-black text-white">
                     <img src="assets\images\photo.jpg" class="profile-photo"
                       style="width:35px; height: 40px; border-radius: 45%">&nbsp;
-                    <span class="fw-bold">Simmy Sebastian</span>
+                    <span class="fw-bold" data-bs-toggle="popover">SIMMY SEBASTIAN</span>
                   </div>
                   <div class="card-body pr-4">
                     <strong>Designation:</strong> Frontend Developer <br>
@@ -111,76 +118,83 @@
             </div>
 
             <div class="d-flex flex-wrap">
-              <button *ngFor="let week of weeks" class="btn btn-info btn-sm m-2 rounded   "
-                (click)="showDays(week)">
-                {{ week.start }} {{ getCurrentMonthName() | slice:0:3 }} to {{ week.end }} {{
-                getCurrentMonthName() | slice:0:3 }}
+              <button *ngFor="let week of weeks" class="btn btn-secondary btn-sm m-1 rounded" (click)="showDays(week)">
+                {{ week.start }} {{ week.month | slice:0:3 }} to {{ week.end }} {{ week.month | slice:0:3 }}
               </button>
             </div>
           </div>
-          <!-- Time Sheet Table -->
-          <div class="row mb-3">
-            <!-- Heading Row -->
-            <div class="col-2 d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label fw-bold">Project Assigned</span>
-              </div>
-            </div>
-            <!-- week section -->
-            <div class="col-8 py-1 border-right">
-              <!-- Display the days of the week inside the border-->
-              <div class="d-flex ms-1 align-items-center justify-content-end">
-                <ng-container *ngFor="let day of daysOfWeek">
-                  <div class="text-center mx-2 text-success">
-                    <div class="fw-bold">{{ day | date: 'EEE' }}</div>
-                    <div class="fw-bold">{{ day | date: 'd MMM' }}</div>
-                  </div>
-                  <div class="ms-3"></div> <!-- Add space between days using ms-4 class -->
-                </ng-container>
-              </div>
-            </div>
 
-            <div class="col d-flex align-items-center justify-content-start" style="height: 50px;">
-              <div class="time-sheet-box">
-                <span class="time-sheet-label fw-bold">Total Hours</span>
-              </div>
-            </div>
-          </div>
+          <!-- Time Sheet Table ----------------------------------------------->
 
-          <!-- Data Row -->
-          <!-- dropdown working fine  -->
-          <div class="row" *ngFor="let row of rows; let i = index" [id]="'row-' + i">
-            <div class="col-2 py-2 d-flex align-items-center justify-content-start" style="margin-left: -10px;">
-              <select class="form-select text-center" style="cursor: pointer;">
-                <option disabled selected hidden>Select Project</option>
-                <option *ngFor="let project of projects" [value]="project">{{ project }}
-                </option>
-              </select>
-            </div>
+          <div class="container table-responsive">
+            <table class="table border w-100">
+              <thead>
+                <tr>
 
-            <div class="col-9 py-2 border-right">
-              <div class="d-flex align-items-center text-start justify-content-start">
-                <ng-container *ngFor="let weekDay of weekDays">
-                  <input #inputField type="text" class="form-control mx-3" style="width: 60px;" pattern="[0-9]*"
-                    inputmode="numeric" placeholder="0.00" (input)="calculateTotalSum()" maxlength="3">
-                </ng-container>
-              </div>
-            </div>
+                  <!-- Heading Row -->
+                  <th class="col align-items-center justify-content-start bg-success">
+                    <div class="time-sheet-box">
+                      <span class="time-sheet-label fw-bold text-white">Project Assigned</span>
+                    </div>
+                  </th>
 
-            <div class="col-1 py-1 d-flex flex-column align-items-center justify-content-center">
-              <div class="sum-box">
-                <span class="fw-bold form-control mx-1 sum-box" id="totalSum-{{i}}">0.00</span>
-              </div>
-            </div>
+                  <!-- Days of the Week section -->
+                  <ng-container *ngFor="let day of daysOfWeek; let i = index">
+                    <th scope="col" class="col py-2 border-right text-white bg-success">
+                      <div class="text-center mx-2">
+                        <div class="fw-bold">{{ day | date: 'EEE' }}</div>
+                        <div class="fw-bold">{{ day | date: 'd MMM' }}</div>
+                      </div>
+                    </th>
+                  </ng-container>
 
-            <div class="d-flex justify-content-end">
-              <!-- Plus icon to Add a row -->
-              <button type="button" class="icon-button me-1 mt-2" (click)="addRow()"><i
-                  class="bi bi-plus-circle"></i></button>
-              <!-- Delete icon to Remove a row -->
-              <button type="button" class="icon-button me-1 mt-2" (click)="deleteRow(i)"><i
-                  class="bi bi-trash"></i></button>
-            </div>
+                  <!-- Total Hours section -->
+                  <th scope="col" th class="col align-items-center justify-content-start bg-success">
+                    <div class="time-sheet-box">
+                      <span class="time-sheet-label fw-bold text-white">Total Hours</span>
+                    </div>
+                  </th>
+                  <th th class="col align-items-center justify-content-start text-white bg-success">
+                    <!-- action section -->
+                    <span></span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- Data Rows -->
+                <tr *ngFor="let row of rows; let i = index" [id]="'row-' + i">
+                  <td class="col py-2 align-items-center justify-content-start border-0">
+                    <select class="form-select text-center" style="cursor: pointer;">
+                      <option disabled selected hidden>Project Name</option>
+                      <option *ngFor="let project of projects" [value]="project">{{ project }}</option>
+                    </select>
+                  </td>
+
+                  <ng-container *ngFor="let weekDay of weekDays; let j = index">
+                    <td class="col py-2 border-right border-0">
+                      <input #inputField type="text" class="form-control mx-3 {{ j === 6 ? 'legend-green' : '' }}"
+                        style="width: 60px;" pattern="[0-9]*" inputmode="numeric" placeholder="0.00"
+                        (input)="calculateTotalSum()" maxlength="3">
+                    </td>
+                  </ng-container>
+
+                  <td class="col d-flex border-0">
+                    <div class="sum-box">
+                      <span class="fw-bold form-control mx-1 legend-orange" id="totalSum-{{i}}">0.00</span>
+                    </div>
+                  </td>
+
+                  <!-- Buttons on the last column -->
+                  <td class="col justify-content-end align-items-center border-0">
+                    <button type="button" class="icon-button me-1 mt-2" (click)="addRow()"><i
+                        class="bi bi-plus-circle"></i></button>
+                    <button type="button" *ngIf="i>0" class="icon-button me-1 mt-2" (click)="deleteRow(i)"><i
+                        class="bi bi-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -190,11 +204,11 @@
         <div class="col">
           <div class="d-flex align-items-center justify-content-end">
             <div class="label-container me-3">
-              <span class="label-text fw-bold fs-5">Total Working Hours:</span>
+              <span class=" fw-bold fs-5">Total Working Hours:</span>
             </div>
             <div class="circle bg-success d-flex align-items-center justify-content-center"
               style="width: 80px; height: 40px; border-radius: 20px;">
-              <span class="span-text fw-bold" style="color: rgb(244, 183, 92);" id="totalSum">{{ totalSumAll }}</span>
+              <span class="span-text fw-bold text-warning" id="totalSum">{{ totalSumAll }}</span>
             </div>
           </div>
         </div>
@@ -202,10 +216,13 @@
 
       <!-- Main Buttons -->
       <div class="d-flex justify-content-center mt-5">
-        <button type="button" class="btn custom-button custom-button-back me-4">BACK</button>
-        <button type="button" class="btn custom-button custom-button-save me-4">SAVE</button>
-        <button type="button" class="btn custom-button custom-button-submit me-4">SUBMIT</button>
-        <button type="button" class="btn custom-button custom-button-back">CANCEL</button>
+
+        <button type="button" class="btn btn-secondary me-4" (click)="goToDashboard()">
+          << BACK</button>
+            <button type="button" class="btn btn-warning me-4">SAVE</button>
+            <button type="button" class="btn btn-success me-4">SUBMIT</button>
+            <button type="button" class="btn btn-danger me-4" (click)="goToDashboard()">CANCEL</button>
+            <button type="button" class="btn btn-secondary">NEXT >></button>
       </div>
     </div>
   </div>

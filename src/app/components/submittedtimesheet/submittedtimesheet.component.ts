@@ -1,13 +1,14 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
-  selector: 'app-createtimesheet',
-  templateUrl: './createtimesheet.component.html',
-  styleUrls: ['./createtimesheet.component.css']
+  selector: 'app-submittedtimesheet',
+  templateUrl: './submittedtimesheet.component.html',
+  styleUrls: ['./submittedtimesheet.component.css']
 })
-export class CreatetimesheetComponent implements OnInit, AfterViewInit {
+export class SubmittedtimesheetComponent implements OnInit, AfterViewInit {
   @ViewChildren('inputField') inputFields!: QueryList<ElementRef<HTMLInputElement>>;
 
   selectedOption: string = '';
@@ -222,7 +223,7 @@ export class CreatetimesheetComponent implements OnInit, AfterViewInit {
 
   }
 
-  // Back button
+  // Cancel button
   goToDashboard() {
     this.router.navigate(['/dashboard']);
   }

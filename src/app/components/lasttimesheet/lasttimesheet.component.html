@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <h1>View Last Time Sheet</h1>
+  <div class="row p-3 mt-4">
+
+    <!-- right side section -->
+
+    <div class="col-md-15">
+      <div class="border p-4">
+        <div class="row align-items-center">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="col-auto">
+
+                <!-- Profile Icon -->
+                <img src="assets\images\photo.jpg" class="profile-photo"
+                  style="width:35px; height: 40px; border-radius: 45%">
+                <span class="profile-name ms-1 text-primary text-decoration-underline" data-bs-toggle="tooltip"
+                  [ngbPopover]="contactCardContent" data-bs-placement="bottom" data-bs-html="true"
+                  [attr.data-bs-content]="profileContent" style="cursor: pointer; font-size: larger;">Simmy
+                  Sebastian</span>
+              </div>
+
+              <ng-template #contactCardContent>
+                <div class="card" style="width: 15rem;">
+                  <div class="card-header bg-black text-white">
+                    <img src="assets\images\photo.jpg" class="profile-photo"
+                      style="width:35px; height: 40px; border-radius: 45%">&nbsp;
+                    <span class="fw-bold" data-bs-toggle="popover">SIMMY SEBASTIAN</span>
+                  </div>
+                  <div class="card-body pr-4">
+                    <strong>Designation:</strong> Frontend Developer <br>
+                    <strong>Phone:</strong> 9876543210 <br>
+                    <strong>Email:</strong> simmy@gmail.com
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+
+          <!-- Time Sheet Table ----------------------------------------------->
+
+          <div class="container table-responsive">
+            <table class="table border w-100">
+              <thead>
+                <tr>
+
+                  <!-- Heading Row -->
+                  <th class="col align-items-center justify-content-start bg-success">
+                    <div class="time-sheet-box">
+                      <span class="time-sheet-label fw-bold text-white">Project Assigned</span>
+                    </div>
+                  </th>
+                  
+                  <!-- Days of the Week section -->
+                  <ng-container *ngFor="let day of daysOfWeek; let i = index">
+                    <th scope="col" class="col py-2 border-right text-white bg-success">
+                      <div class="text-center mx-2">
+                        <div class="fw-bold">{{ day | date: 'EEE' }}</div>
+                        <div class="fw-bold">{{ day | date: 'd MMM' }}</div>
+                      </div>
+                    </th>
+                  </ng-container>
+
+                  <!-- Total Hours section -->
+                  <th scope="col" th class="col align-items-center justify-content-start bg-success">
+                    <div class="time-sheet-box">
+                      <span class="time-sheet-label fw-bold text-white">Total Hours</span>
+                    </div>
+                  </th>
+                  
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- Data Rows -->
+                <tr *ngFor="let row of rows; let i = index" [id]="'row-' + i">
+                  <td class="justify-content-start">
+                    <span class="fw-bold fs-7">Project Name 1</span>
+                  </td>
+  
+                  <ng-container *ngFor="let weekDay of weekDays; let j = index">
+                    <td class="col py-2">
+                      <!-- Use 'readonly' to make the input fields non-editable -->
+                      <input #inputField type="text" class="form-control mx-3 {{ j === 6 ? 'legend-green' : '' }}"
+                        style="width: 60px;" pattern="[0-9]*" inputmode="numeric" placeholder="0.00"
+                        (input)="calculateTotalSum()" maxlength="3" readonly>
+                    </td>
+                  </ng-container>
+  
+                  <td class="col d-flex border-0">
+                    <div class="sum-box">
+                      <span class="fw-bold form-control mx-1 legend-orange" id="totalSum-{{i}}">0.00</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngFor="let row of rows; let i = index" [id]="'row-' + i">
+                  <td class="justify-content-start">
+                    <span class="fw-bold fs-7">Project Name 2</span>
+                  </td>
+  
+                  <ng-container *ngFor="let weekDay of weekDays; let j = index">
+                    <td class="col py-2">
+                      <!-- Use 'readonly' to make the input fields non-editable -->
+                      <input #inputField type="text" class="form-control mx-3 {{ j === 6 ? 'legend-green' : '' }}"
+                        style="width: 60px;" pattern="[0-9]*" inputmode="numeric" placeholder="0.00"
+                        (input)="calculateTotalSum()" maxlength="3" readonly>
+                    </td>
+                  </ng-container>
+  
+                  <td class="col d-flex border-0">
+                    <div class="sum-box">
+                      <span class="fw-bold form-control mx-1 legend-orange" id="totalSum-{{i}}">0.00</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngFor="let row of rows; let i = index" [id]="'row-' + i">
+                  <td class="justify-content-start">
+                    <span class="fw-bold fs-7">Project Name 3</span>
+                  </td>
+  
+                  <ng-container *ngFor="let weekDay of weekDays; let j = index">
+                    <td class="col py-2">
+                      <!-- Use 'readonly' to make the input fields non-editable -->
+                      <input #inputField type="text" class="form-control mx-3 {{ j === 6 ? 'legend-green' : '' }}"
+                        style="width: 60px;" pattern="[0-9]*" inputmode="numeric" placeholder="0.00"
+                        (input)="calculateTotalSum()" maxlength="3" readonly>
+                    </td>
+                  </ng-container>
+  
+                  <td class="col d-flex border-0">
+                    <div class="sum-box">
+                      <span class="fw-bold form-control mx-1 legend-orange" id="totalSum-{{i}}">0.00</span>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      <!-- New span text box -->
+      <div class="row mt-4">
+        <div class="col">
+          <div class="d-flex align-items-center justify-content-end">
+            <div class="label-container me-3">
+              <span class="fw-bold fs-5">Total Working Hours:</span>
+            </div>
+            <div class="circle bg-success d-flex align-items-center justify-content-center"
+              style="width: 80px; height: 40px; border-radius: 20px;">
+              <span class="span-text fw-bold text-warning" id="totalSum">{{ totalSumAll }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Buttons -->
+      <div class="d-flex justify-content-center mt-5">
+        <button type="button" class="btn btn-warning me-4">Request To Edit</button>
+        <button type="button" class="btn btn-secondary me-4" (click)="goToDashboard()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

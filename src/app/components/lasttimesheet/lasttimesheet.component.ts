@@ -1,13 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-createtimesheet',
-  templateUrl: './createtimesheet.component.html',
-  styleUrls: ['./createtimesheet.component.css']
+  selector: 'app-lasttimesheet',
+  templateUrl: './lasttimesheet.component.html',
+  styleUrls: ['./lasttimesheet.component.css']
 })
-export class CreatetimesheetComponent implements OnInit, AfterViewInit {
+export class LasttimesheetComponent implements OnInit, AfterViewInit {
   @ViewChildren('inputField') inputFields!: QueryList<ElementRef<HTMLInputElement>>;
 
   selectedOption: string = '';
@@ -25,15 +25,7 @@ export class CreatetimesheetComponent implements OnInit, AfterViewInit {
   totalSumAll: string = '0.00';
   columnSums: number[] = [];
 
-  selectedProject: string = '';
-  projects: string[] = [
-    'Project 1',
-    'Project 2',
-    'Project 3',
-    'Project 4',
-    'Project 5'
-  ];
-
+  
   constructor(private calendar: NgbCalendar, private router: Router) {
     const today = this.calendar.getToday();
     this.selectedDate = today;

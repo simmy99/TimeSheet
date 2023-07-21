@@ -13,13 +13,23 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LasttimesheetComponent } from './components/lasttimesheet/lasttimesheet.component';
+import { SubmittedtimesheetComponent } from './components/submittedtimesheet/submittedtimesheet.component';
+import { MytimesheetComponent } from './components/mytimesheet/mytimesheet.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreatetimesheetComponent
+    CreatetimesheetComponent,
+    DashboardComponent,
+    LasttimesheetComponent,
+    SubmittedtimesheetComponent,
+    MytimesheetComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

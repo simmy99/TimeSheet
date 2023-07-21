@@ -1,13 +1,6 @@
 .container {
   margin-top: 20px;
 }
-/* Profile Icon */
-.profile-icon {
-  font-size: 1rem;
-  color: #0f22ec;
-  cursor: pointer;
-  margin-left: 0.70rem;
-}
 /* Legend */
 .legend-box {
   display: flex;
@@ -39,26 +32,6 @@
   cursor: pointer;
   margin-right: 10px;
 }
-/* Total Sum color */
-.sum-box {
-  background-color: rgba(247, 138, 5, 0.317);
-}
-/* Main Buttons */
-.custom-button {
-  font-weight: bold;
-}
-.custom-button-back {
-  background-color: rgba(224, 161, 224, 0.317);
-  color: black;
-}
-.custom-button-save {
-  background-color: rgb(138, 243, 138);
-  color: black;
-}
-.custom-button-submit {
-  background-color: lightblue;
-  color: black;
-}
 /* add & delete button */
 .icon-button {
   background: none;
@@ -68,7 +41,30 @@
   font-size: 1.2rem;
 }
 
+/* left side transition */
+.transition-left {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
 
-.invalid-input {
-  border-color: red;
+.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-in-left {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* right side transition */
+.full-width {
+  width: 95%;
+  transition: width 0.3s ease;
+}
+
+.collapse-left {
+  width: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+
 }

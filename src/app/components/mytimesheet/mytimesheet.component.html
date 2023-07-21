@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <div class="row justify-content-end">
+    <div class="col-15">
+      <h2>View my all Timesheet</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center text-white fs-6">
+    <div class="col-6">
+      <form class="border rounded p-4 border-1" style="background-color: rgb(87, 73, 117);">
+
+        <div class="form-group mt-4">
+          <label for="fromDate">From Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="fromDate" placeholder="Choose Date" [(ngModel)]="fromDate"
+              name="fromDate" (click)="openCalendar('fromDate')" readonly>
+            <div class="input-group-append">
+              <span class="input-group-text" (click)="openCalendar('fromDate')">
+                <i class="bi bi-calendar"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-4">
+          <label for="toDate">To Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="toDate" placeholder="Choose Date" [(ngModel)]="toDate"
+              name="toDate" (click)="openCalendar('toDate')" readonly>
+            <div class="input-group-append">
+              <span class="input-group-text" (click)="openCalendar('toDate')">
+                <i class="bi bi-calendar"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-4">
+          <label for="status">Project</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option value="pending">Project 1</option>
+            <option value="inProgress">Project 2</option>
+            <option value="completed">Project 3</option>
+            <option value="inProgress">Project 4</option>
+            <option value="completed">Project 5</option>
+          </select>
+        </div>
+
+        <div class="form-group mt-4">
+          <label for="status">Status</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option value="pending">Pending</option>
+            <option value="inProgress">In Progress</option>
+            <option value="completed">Completed</option>
+            <!-- Add more status options as needed -->
+          </select>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+          <button type="button" class="btn btn-success me-4" (click)="goToCreatetimesheet()">SEARCH</button>
+          <button type="button" class="btn btn-secondary me-4" (click)="goToDashboard()">CANCEL</button>
+        </div>
+
+      </form>
+
+    </div>
