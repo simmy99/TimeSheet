@@ -1,0 +1,82 @@
+<section class="text-center">
+    <!-- Background color -->
+    <div class="p-5 bg-image" style="background-color: rgb(12, 69, 5); height: 100px;"></div>
+
+    <div class="card mx-4 mx-md-5 shadow-5-strong"
+        style="margin-top: -60px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
+        <div class="card-body py- px-md-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h6 class="fw-bold mb-1">Emp ID: 0000</h6>
+                    <h6 class="fw-bold mb-5">Simmy Sebastian</h6>
+                </div>
+            </div>
+        </div>
+
+        <section class="text-center">
+            <div class="row">
+                <!-- Left-side table -->
+                <div class="col-lg-6">
+                    <div class="table-responsive zoom-out">
+                        <h5 class="fw-bold">July1 - July15 (2023)</h5>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="fw-bold text-success" colspan="1">Project</th>
+                                    <!-- Add headings for Days 1 to 15 -->
+                                    <ng-container *ngFor="let header of headers1to15">
+                                        <th class="fw-bold text-success" colspan="1">D{{ header }}</th>
+                                    </ng-container>
+                                    <!-- Add the 16th column heading -->
+                                    <th class="fw-bold text-success" colspan="1">D15</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of rows">
+                                    <td class="fw-bold">{{ row.project }}</td>
+                                    <!-- data1to16 (Day 1 to 16) -->
+                                    <td *ngFor="let data of row.data1to15">{{ data }}</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right-side table -->
+                <div class="col-lg-6">
+                    <div class="table-responsive zoom-out">
+                        <h5 class="fw-bold">July16 - July31 (2023)</h5>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="fw-bold text-success" colspan="1">Project</th>
+                                    <!-- Add headings for Days 16 to 31 -->
+                                    <ng-container *ngFor="let header of headers16to31">
+                                        <th class="fw-bold text-success" colspan="1">D{{ header }}</th>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Add rows for the second table if necessary -->
+                                <tr *ngFor="let row of rows">
+                                    <td class="fw-bold">{{ row.project }}</td>
+                                    <!-- data1to16 (Day 1 to 16) -->
+                                    <td *ngFor="let data of row.data1to15">{{ data }}</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <button type="button" class="btn btn-success me-4" (click)="goToMytimesheet()">BACK</button>
+        <button type="button" class="btn btn-primary me-4" (click)="goToDashboard()">HOME</button>
+    </div>
+</section>

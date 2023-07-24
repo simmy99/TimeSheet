@@ -3,7 +3,6 @@
   <div class="row p-3 mt-4">
 
     <!-- right side section -->
-
     <div class="col-md-15">
       <div class="border p-4">
         <div class="row align-items-center">
@@ -38,7 +37,6 @@
           </div>
 
           <!-- Time Sheet Table ----------------------------------------------->
-
           <div class="container table-responsive">
             <table class="table border w-100">
               <thead>
@@ -66,8 +64,7 @@
                     <div class="time-sheet-box">
                       <span class="time-sheet-label fw-bold text-white">Total Hours</span>
                     </div>
-                  </th>
-                  
+                  </th>                 
                 </tr>
               </thead>
 
@@ -135,7 +132,6 @@
                     </div>
                   </td>
                 </tr>
-
               </tbody>
             </table>
           </div>
@@ -156,10 +152,27 @@
         </div>
       </div>
 
+      <div class="modal" tabindex="-1" [ngClass]="{'d-block': isModalVisible}" (click)="hideModal()">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Request Status</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="hideModal()"></button>
+            </div>
+            <div class="modal-body">
+              <p>Your request has been submitted.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="hideModal()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Main Buttons -->
       <div class="d-flex justify-content-center mt-5">
-        <button type="button" class="btn btn-warning me-4">Request To Edit</button>
-        <button type="button" class="btn btn-secondary me-4" (click)="goToDashboard()">Cancel</button>
+        <button type="button" class="btn btn-warning me-4" (click)="showModal()">Request To Edit</button>
+        <button type="button" class="btn btn-danger me-4" (click)="goToDashboard()">Cancel</button>
       </div>
     </div>
   </div>

@@ -18,6 +18,8 @@ import { LasttimesheetComponent } from './components/lasttimesheet/lasttimesheet
 import { SubmittedtimesheetComponent } from './components/submittedtimesheet/submittedtimesheet.component';
 import { MytimesheetComponent } from './components/mytimesheet/mytimesheet.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchComponent } from './components/search/search.component';
+
 
 
 
@@ -29,7 +31,9 @@ import { HomeComponent } from './components/home/home.component';
     LasttimesheetComponent,
     SubmittedtimesheetComponent,
     MytimesheetComponent,
-    HomeComponent
+    HomeComponent,
+    SearchComponent
+    
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class MytimesheetComponent {
 
+  dateRange: any;
   fromDate: string;
   toDate: string;
   selectedProject: string;
@@ -21,6 +22,8 @@ export class MytimesheetComponent {
  this.selectedProject = '';
  this.selectedStatus = '';
 }
+
+
   
 openCalendar(field: string) {
   // Implement your logic to open the calendar for the respective field.
@@ -34,8 +37,8 @@ openCalendar(field: string) {
 }
 
 //search button
-goToCreatetimesheet() {
-  this.router.navigate(['/createtimesheet']);
+goToSearch() {
+  this.router.navigate(['/search']);
 }
 
 }

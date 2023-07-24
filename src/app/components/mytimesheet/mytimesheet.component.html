@@ -1,67 +1,81 @@
-<div class="container mt-4">
-  <div class="row justify-content-end">
-    <div class="col-15">
-      <h2>View my all Timesheet</h2>
+<section class="text-center">
+  <!-- Background color -->
+  <div class="p-5 bg-image" style="background-color: rgb(12, 69, 5); height: 300px;"></div>
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong"
+    style="margin-top: -150px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
+    <div class="card-body py- px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">View All My Timesheet</h2>
+          <form>
+            <!-- From time input -->
+            <div class="row">
+              <div class="col-md-6 mt-4">
+                <div style="display: flex; flex-direction: column;">
+                  <label for="dateRange" style="align-self: flex-start; font-weight:900;">From Date</label>
+                  <div class="input-group">
+                    <input type="date" class="form-control col-sm-3" id="dateRange" placeholder="Select date range"
+                      [(ngModel)]="dateRange" />
+                    <div class="input-group-append">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- To time input -->
+              <div class="col-md-6 mt-4">
+                <div style="display: flex; flex-direction: column;">
+                  <label for="dateRange" style="align-self: flex-start; font-weight:900;">To Date</label>
+                  <div class="input-group">
+                    <input type="date" class="form-control col-sm-3" id="dateRange" placeholder="Select date range"
+                      [(ngModel)]="dateRange" />
+                    <div class="input-group-append">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- project input -->
+            <div class="form-group mt-4">
+              <div style="display: flex; flex-direction: column;">
+                <label for="toDate" style="align-self: flex-start; font-weight:900;">Select Project</label>
+                <select id="inputState" class="form-control">
+                  <option selected>Choose...</option>
+                  <option value="pending">Project 1</option>
+                  <option value="inProgress">Project 2</option>
+                  <option value="completed">Project 3</option>
+                  <option value="inProgress">Project 4</option>
+                  <option value="completed">Project 5</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- status input -->
+            <div class="form-group mt-4">
+              <div style="display: flex; flex-direction: column;">
+                <label for="toDate" style="align-self: flex-start; font-weight:900;">Select Status</label>
+                <select id="inputState" class="form-control">
+                  <option selected>Choose...</option>
+                  <option value="pending">Pending</option>
+                  <option value="inProgress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+
+            <div class="d-flex justify-content-center mt-4">
+              <button type="button" class="btn btn-success me-4" (click)="goToSearch()">SEARCH</button>
+              <button type="button" class="btn btn-danger me-4" (click)="goToDashboard()">CANCEL</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div class="row justify-content-center text-white fs-6">
-    <div class="col-6">
-      <form class="border rounded p-4 border-1" style="background-color: rgb(87, 73, 117);">
-
-        <div class="form-group mt-4">
-          <label for="fromDate">From Date</label>
-          <div class="input-group">
-            <input type="text" class="form-control" id="fromDate" placeholder="Choose Date" [(ngModel)]="fromDate"
-              name="fromDate" (click)="openCalendar('fromDate')" readonly>
-            <div class="input-group-append">
-              <span class="input-group-text" (click)="openCalendar('fromDate')">
-                <i class="bi bi-calendar"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group mt-4">
-          <label for="toDate">To Date</label>
-          <div class="input-group">
-            <input type="text" class="form-control" id="toDate" placeholder="Choose Date" [(ngModel)]="toDate"
-              name="toDate" (click)="openCalendar('toDate')" readonly>
-            <div class="input-group-append">
-              <span class="input-group-text" (click)="openCalendar('toDate')">
-                <i class="bi bi-calendar"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group mt-4">
-          <label for="status">Project</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option value="pending">Project 1</option>
-            <option value="inProgress">Project 2</option>
-            <option value="completed">Project 3</option>
-            <option value="inProgress">Project 4</option>
-            <option value="completed">Project 5</option>
-          </select>
-        </div>
-
-        <div class="form-group mt-4">
-          <label for="status">Status</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option value="pending">Pending</option>
-            <option value="inProgress">In Progress</option>
-            <option value="completed">Completed</option>
-            <!-- Add more status options as needed -->
-          </select>
-        </div>
-
-        <div class="d-flex justify-content-center mt-4">
-          <button type="button" class="btn btn-success me-4" (click)="goToCreatetimesheet()">SEARCH</button>
-          <button type="button" class="btn btn-secondary me-4" (click)="goToDashboard()">CANCEL</button>
-        </div>
-
-      </form>
-
-    </div>
+</section>

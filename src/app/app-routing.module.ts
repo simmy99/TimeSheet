@@ -6,7 +6,8 @@ import { LasttimesheetComponent } from './components/lasttimesheet/lasttimesheet
 import { SubmittedtimesheetComponent } from './components/submittedtimesheet/submittedtimesheet.component';
 import { MytimesheetComponent } from './components/mytimesheet/mytimesheet.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { SearchComponent } from './components/search/search.component';
+ 
 const routes: Routes = [
 
   {path:'', redirectTo: '/home', pathMatch: 'full'},
@@ -15,7 +16,9 @@ const routes: Routes = [
   {path:'createtimesheet', component: CreatetimesheetComponent},
   {path:'lasttimesheet', component: LasttimesheetComponent},
   {path:'submittedtimesheet', component: SubmittedtimesheetComponent},
-  {path:'mytimesheet', component: MytimesheetComponent}
+  {path:'mytimesheet', component: MytimesheetComponent},
+  {path:'search', component: SearchComponent}
+
 
 ];
 

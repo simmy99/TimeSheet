@@ -11,6 +11,7 @@ export class LasttimesheetComponent implements OnInit, AfterViewInit {
   @ViewChildren('inputField') inputFields!: QueryList<ElementRef<HTMLInputElement>>;
 
   selectedOption: string = '';
+  isModalVisible = false;
 
   isLeftSectionVisible: boolean = false;
   rows: any[] = [];
@@ -212,6 +213,14 @@ export class LasttimesheetComponent implements OnInit, AfterViewInit {
 
     this.daysOfWeek = daysOfWeek;
 
+  }
+
+  showModal() {
+    this.isModalVisible = true;
+  }
+
+  hideModal() {
+    this.isModalVisible = false;
   }
 
   // Back button
