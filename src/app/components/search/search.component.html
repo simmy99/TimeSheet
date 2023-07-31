@@ -18,6 +18,68 @@
                 <!-- Left-side table -->
                 <div class="col-lg-6">
                     <div class="table-responsive zoom-out">
+                        <h5 class="fw-bold">June1 - June15 (2023)</h5>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="fw-bold text-success" colspan="1">Project</th>
+                                    <!-- Add headings for Days 1 to 15 -->
+                                    <ng-container *ngFor="let header of headers1to15">
+                                        <th class="fw-bold text-success" colspan="1">D{{ header }}</th>
+                                    </ng-container>
+                                    <!-- Add the 16th column heading -->
+                                    <th class="fw-bold text-success" colspan="1">D15</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of rows">
+                                    <td class="fw-bold">{{ row.project }}</td>
+                                    <!-- data1to16 (Day 1 to 16) -->
+                                    <td *ngFor="let data of row.data1to15">{{ data }}</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right-side table -->
+                <div class="col-lg-6">
+                    <div class="table-responsive zoom-out">
+                        <h5 class="fw-bold">June16 - June31 (2023)</h5>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="fw-bold text-success" colspan="1">Project</th>
+                                    <!-- Add headings for Days 16 to 31 -->
+                                    <ng-container *ngFor="let header of headers16to31">
+                                        <th class="fw-bold text-success" colspan="1">D{{ header }}</th>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Add rows for the second table if necessary -->
+                                <tr *ngFor="let row of rows">
+                                    <td class="fw-bold">{{ row.project }}</td>
+                                    <!-- data1to16 (Day 1 to 16) -->
+                                    <td *ngFor="let data of row.data1to15">{{ data }}</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="text-center">
+            <div class="row">
+                <!-- Left-side table -->
+                <div class="col-lg-6">
+                    <div class="table-responsive zoom-out">
                         <h5 class="fw-bold">July1 - July15 (2023)</h5>
 
                         <table class="table table-bordered">
@@ -47,32 +109,36 @@
                 <!-- Right-side table -->
                 <div class="col-lg-6">
                     <div class="table-responsive zoom-out">
-                        <h5 class="fw-bold">July16 - July31 (2023)</h5>
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="fw-bold text-success" colspan="1">Project</th>
-                                    <!-- Add headings for Days 16 to 31 -->
-                                    <ng-container *ngFor="let header of headers16to31">
-                                        <th class="fw-bold text-success" colspan="1">D{{ header }}</th>
-                                    </ng-container>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Add rows for the second table if necessary -->
-                                <tr *ngFor="let row of rows">
-                                    <td class="fw-bold">{{ row.project }}</td>
-                                    <!-- data1to16 (Day 1 to 16) -->
-                                    <td *ngFor="let data of row.data1to15">{{ data }}</td>
-                                    <td>0</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                      <h5 class="fw-bold">July 16 - July 31 (2023)</h5>
+                  
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th class="fw-bold text-success" colspan="1">Project</th>
+                            <!-- Add headings for Days 16 to 31 -->
+                            <ng-container *ngFor="let header of headers16to31">
+                              <th class="fw-bold text-success" colspan="1">D{{ header }}</th>
+                            </ng-container>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Add rows for the second table if necessary -->
+                          <tr *ngFor="let row of rows">
+                            <td class="fw-bold">{{ row.project }}</td>
+                            <!-- data1to16 (Day 1 to 16) -->
+                            <td *ngFor="let data of row.data1to15">{{ data }}</td>
+                            <!-- Last column -->
+                            <td>0</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-                </div>
+                  </div>
+                  
             </div>
         </section>
+
+
     </div>
 
     <div class="d-flex justify-content-center mt-4">
